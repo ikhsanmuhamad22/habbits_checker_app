@@ -14,12 +14,12 @@ class AppTheme {
     textTheme: const TextTheme(
       titleMedium: TextStyle(
         fontSize: 18,
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.w600,
         color: AppColors.textPrimary,
       ),
       bodyMedium: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
         color: AppColors.textPrimary,
       ),
       titleLarge: TextStyle(
