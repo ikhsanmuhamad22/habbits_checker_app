@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:habbits_checker/models/habits_model.dart';
+import 'package:habbits_checker/pages/add_habit_page.dart';
 import 'package:habbits_checker/theme/app_colors.dart';
 import 'package:habbits_checker/widgets/habit_checkbox.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:habbits_checker/widgets/habit_progress.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -17,17 +18,11 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        leading: Icon(PhosphorIcons.list()),
+        leading: Icon(Icons.format_list_bulleted_rounded),
         title: Text(
           'Habit Chekcer',
           style: Theme.of(context).textTheme.titleLarge,
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: Icon(PhosphorIcons.sun()),
-          ),
-        ],
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
@@ -74,6 +69,34 @@ class _MainPageState extends State<MainPage> {
                     ],
                   );
                 },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: HabitProgress(
+                completed: habits.where((h) => h.isDone).length,
+                total: habits.length,
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(bottom: 36, right: 16, left: 16),
+              width: double.infinity,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.all(AppColors.accent),
+                ),
+                onPressed:
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AddHabitPage()),
+                    ),
+                child: Text(
+                  '+ Add Habit',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
             ),
           ],
