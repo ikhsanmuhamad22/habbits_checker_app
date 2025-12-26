@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habbits_checker/models/habit_repeat.dart';
+import 'package:habbits_checker/models/habits_model.dart';
+import 'package:habbits_checker/theme/app_colors.dart';
 import 'package:habbits_checker/widgets/habit_name_input.dart';
 import 'package:habbits_checker/widgets/habit_repeat_input.dart';
 
@@ -11,18 +13,24 @@ class AddHabitPage extends StatefulWidget {
 }
 
 class _AddHabitPageState extends State<AddHabitPage> {
-  final TextEditingController habitController = TextEditingController();
-
   @override
   void dispose() {
     habitController.dispose();
     super.dispose();
   }
 
+  final TextEditingController habitController = TextEditingController();
+
   HabitRepeat repeat = HabitRepeat.daily;
 
   @override
   Widget build(BuildContext context) {
+    void saveHabit() {
+      if (habitController.text.trim().isEmpty) return;
+      final habit = Habit(title: habitController.text.trim(), repeat: repeat);
+      Navigator.pop(context, habit);
+    }
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -51,6 +59,23 @@ class _AddHabitPageState extends State<AddHabitPage> {
                     repeat = value;
                   });
                 },
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(16),
+              width: double.infinity,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.all(AppColors.accent),
+                ),
+                onPressed: () => saveHabit(),
+                child: Text(
+                  'Save Habit',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
             ),
           ],

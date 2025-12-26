@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:habbits_checker/models/habits_model.dart';
 import 'package:habbits_checker/pages/add_habit_page.dart';
 import 'package:habbits_checker/theme/app_colors.dart';
+import 'package:habbits_checker/widgets/custom_drawer.dart';
 import 'package:habbits_checker/widgets/habit_checkbox.dart';
 import 'package:habbits_checker/widgets/habit_progress.dart';
 
@@ -15,15 +16,38 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
+    void openAddHabitPage() async {
+      final Habit? newHabit = await Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const AddHabitPage()),
+      );
+
+      if (newHabit != null) {
+        setState(() {
+          habits.add(newHabit);
+        });
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        leading: Icon(Icons.format_list_bulleted_rounded),
+        leading: Builder(
+          builder: (context) {
+            return IconButton(
+              icon: const Icon(Icons.menu),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            );
+          },
+        ),
         title: Text(
           'Habit Chekcer',
           style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
+      drawer: CustomDrawer(),
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
         child: Column(
@@ -85,11 +109,7 @@ class _MainPageState extends State<MainPage> {
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.all(AppColors.accent),
                 ),
-                onPressed:
-                    () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => AddHabitPage()),
-                    ),
+                onPressed: () => openAddHabitPage(),
                 child: Text(
                   '+ Add Habit',
                   style: TextStyle(
