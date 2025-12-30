@@ -43,127 +43,131 @@ class _AddHabitPageState extends State<AddHabitPage> {
       body: LayoutBuilder(
         builder: (context, constraints) {
           if (constraints.maxWidth < 1000) {
-            return Center(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: 600),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Habit Name',
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      SizedBox(height: 16),
-                      HabitNameInput(controller: habitController),
-                      SizedBox(height: 16),
-                      Text(
-                        'Repeat',
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      SizedBox(height: 16),
-                      Container(
-                        alignment: Alignment.center,
-                        child: HabitRepeatInput(
-                          selected: repeat,
-                          onChanged: (value) {
-                            setState(() {
-                              repeat = value;
-                            });
-                          },
+            return SingleChildScrollView(
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: 600),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Habit Name',
+                          style: Theme.of(context).textTheme.titleMedium,
                         ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.all(16),
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: WidgetStateProperty.all(
-                              AppColors.accent,
-                            ),
-                          ),
-                          onPressed: () => saveHabit(),
-                          child: Text(
-                            'Save Habit',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                            ),
+                        SizedBox(height: 16),
+                        HabitNameInput(controller: habitController),
+                        SizedBox(height: 16),
+                        Text(
+                          'Repeat',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        SizedBox(height: 16),
+                        Container(
+                          alignment: Alignment.center,
+                          child: HabitRepeatInput(
+                            selected: repeat,
+                            onChanged: (value) {
+                              setState(() {
+                                repeat = value;
+                              });
+                            },
                           ),
                         ),
-                      ),
-                    ],
+                        Container(
+                          padding: EdgeInsets.all(16),
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: WidgetStateProperty.all(
+                                AppColors.accent,
+                              ),
+                            ),
+                            onPressed: () => saveHabit(),
+                            child: Text(
+                              'Save Habit',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             );
           } else {
-            return Row(
-              children: [
-                Expanded(child: SvgPicture.asset('assets/image/image2.svg')),
-                SizedBox(width: 32),
-                Expanded(
-                  child: Center(
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(maxWidth: 600),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 16,
-                          horizontal: 32,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Habit Name',
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                            SizedBox(height: 16),
-                            HabitNameInput(controller: habitController),
-                            SizedBox(height: 16),
-                            Text(
-                              'Repeat',
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                            SizedBox(height: 16),
-                            Container(
-                              alignment: Alignment.center,
-                              child: HabitRepeatInput(
-                                selected: repeat,
-                                onChanged: (value) {
-                                  setState(() {
-                                    repeat = value;
-                                  });
-                                },
+            return SingleChildScrollView(
+              child: Row(
+                children: [
+                  Expanded(child: SvgPicture.asset('assets/image/image2.svg')),
+                  SizedBox(width: 32),
+                  Expanded(
+                    child: Center(
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(maxWidth: 600),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 16,
+                            horizontal: 32,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Habit Name',
+                                style: Theme.of(context).textTheme.titleMedium,
                               ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.all(16),
-                              width: double.infinity,
-                              child: ElevatedButton(
-                                style: ButtonStyle(
-                                  backgroundColor: WidgetStateProperty.all(
-                                    AppColors.accent,
-                                  ),
-                                ),
-                                onPressed: () => saveHabit(),
-                                child: Text(
-                                  'Save Habit',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                              SizedBox(height: 16),
+                              HabitNameInput(controller: habitController),
+                              SizedBox(height: 16),
+                              Text(
+                                'Repeat',
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                              SizedBox(height: 16),
+                              Container(
+                                alignment: Alignment.center,
+                                child: HabitRepeatInput(
+                                  selected: repeat,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      repeat = value;
+                                    });
+                                  },
                                 ),
                               ),
-                            ),
-                          ],
+                              Container(
+                                padding: EdgeInsets.all(16),
+                                width: double.infinity,
+                                child: ElevatedButton(
+                                  style: ButtonStyle(
+                                    backgroundColor: WidgetStateProperty.all(
+                                      AppColors.accent,
+                                    ),
+                                  ),
+                                  onPressed: () => saveHabit(),
+                                  child: Text(
+                                    'Save Habit',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             );
           }
         },
